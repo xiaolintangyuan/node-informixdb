@@ -1,102 +1,22 @@
+# xiaolintangyuan/node-informixdb 
+## Fork Notice
+This is a fork of [OpenInformix/node-informixdb](https://github.com/OpenInformix/node-informixdb).
+
+I made a fork of this repository as I need to continue using informix drivers in my projects with "onsoctcp" protocol while updating them to the latest Node versions. The official ibm nodejs driver project [ibmdb/node-ibm_db](https://github.com/ibmdb/node-ibm_db) does not support the "onsoctcp" protocol and [I don't think they plan to ever support it](https://github.com/ibmdb/node-ibm_db/issues/506). Therefore it would only make sense for me to fork this repository and update it to support the latest node versions.
+
+**If you use `drsoctcp` protocol, I strongly suggest that you use the official project instead.**
+
+To use this library, you MUST have Informix CSDK installed and CSDK_HOME environment variables set as the library will build the node bindings during install. Otherwise, the library should behave exactly the same. I have done some housekeeping to remove unused dependencies.
+
+No warranty or support provided. Please use this project as-is. Issues / PRs are not monitored and not entertained. Use at your own risk.
+
 # Informix native node.js driver - node-informixdb:
 Informix native node.js driver is a high performance driver with asynchronous/synchronous interface suitable for highly scalable enterprise applications and lightweight enough for Internet of things (IoT) solutions working with Informix database.
-
-**Supported Platforms** - Windows64, Linuxx64, Linuxia32, AIX.
-
-## Supported Node.js Versions
-
-**Recommended version of node.js is >= V10.X**
-
-| Node.js Version   | Windows 64        | Linux x64         | MacOS             | AIX                |
-| :---:             | :---:             | :---:             | :---:             | :---:              |
-| < V8.X            | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED)  |
-|   V8.X            | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED)  |
-|   V9.X            | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED) | NO (DISCONTINUED)  |
-|   V10.X           | YES               | YES               | NO                | YES                |
-|   V11.X           | YES               | YES               | NO                | YES                |
-|   V12.X           | YES               | YES               | NO                | YES                |
-|   V13.X           | YES               | YES               | NO                | YES                |
-|   V14.X           | YES               | YES               | NO                | YES                |
-| > V14.X           | FUTURE            | FUTURE            | FUTURE            | FUTURE             |
-
-**The latest node.js version using which informixdb is tested: 14.17.5**
-
-## Prerequisite
-
-- Python 2.7 is required by node-gyp.
-
-- Informix ODBC (It will get download automatically while installation, if CSDK_HOME/INFORMIXDIR is not set.)
-
-- If Windows Platform: for compilation of informixdb Visual Studio is required, if not available then module will install with "pre-compiled" binary version.
-
-- If Linux Platform: for compilation of informixdb C++11 compiler is required, if not available then module will install with "pre-compiled" binary version.
-  (Note the default compiler on RHEL 6 does not have the required support. Install a newer compiler or upgrade the older one.)
-
-### Important Environment Variables and Download Essentials
-** To use exiting CSDK installation directory set below env variables, it will prevent automatic download of Informix ODBC driver **
-
-`CSDK_HOME:`
-
-- USE:
-	- On distributed platforms, set this environment variable if you want to compile/build the informixdb module.
-
-- HOW:
-	- Set **CSDK_HOME** environment variable to a pre-installed **Informix CSDK installation directory**.
-
-`INFORMIXDIR:`
-
-- USE:
-	- On distributed platforms, set this environment variable if you want to compile/build the informixdb module.
-
-- HOW:
-	- Set **INFORMIXDIR** environment variable to a pre-installed **Informix CSDK installation directory**.
-
-`CSDK_INSTALLER_URL :`
-
-- USE:
-	- Set this environment variable to by-pass the HCL Hosted URL for downloading odbc driver.
-
-- HOW:
-	- Set **CSDK_INSTALLER_URL** environment variable with alternate odbc/driver downloading URL link or with locally downloaded "tar/zipped driver's parent directory path.
-
-- TIP:
-	- If you don't have alternate hosting URL then, you can download the tar/zipped file of driver from the [HCL Hosted URL](#downloadODBC) and can set the **CSDK_INSTALLER_URL** environment variable to the downloaded "tar/zipped driver's" parent directory path. No need to untar/unzip the driver and do not change the name of downloaded file.
-
-### <a name="downloadODBC"></a> Download onedb-odbc-driver ([based on your platform & architecture](#systemDetails)) from the below HCL Hosted URL:
-> [DOWNLOAD ODBC DRIVER](https://hcl-onedb.github.io/odbc/)
-
-#### <a name="systemDetails"></a> Informix ODBC Drivers for Specific Platform and Architecture
-
-|Platform      |Architecture    |ODBC Driver                       |Supported     |
-| :---:        |  :---:         |  :---:                           |  :---:       |
-|Linux         |  x64           |OneDB-Linux64-ODBC-Driver.tar.gz  |  Yes         |
-|Windows       |  x64           |OneDB-Win64-ODBC-Driver.zip       |  Yes         |
-
-
-## Install
-
-You may install the package using npm install command:
-
-```
-npm install informixdb
-```
-
-or, you can install the latest driver from Github (Not recommanded for production use):
-
-```
-npm install git+https://github.com/OpenInformix/node-informixdb.git
-```
-
-> [For more installation details please refer:  INSTALLATION GUIDE](https://github.com/OpenInformix/node-informixdb/blob/master/INSTALL.md)
-
-## API Documentation
-
-> [For complete list of informixdb APIs and example, please check API DOCUMENTATION](https://github.com/OpenInformix/node-informixdb/blob/master/APIDocumentation.md)
 
 ## Quick Example
 
 ```javascript
-var informix = require('informixdb');
+const informix = require('informixdb');
 
 informix.open("SERVER=dbServerName;DATABASE=dbName;HOST=hostName;SERVICE=port;UID=userID;PWD=password;", function (err,conn) {
   if (err) return console.log(err);
@@ -126,13 +46,13 @@ require("informixdb").open(connectionString, function (err, conn){
 or by using the helper function:
 
 ```javascript
-var informix = require("informixdb")();
+const informix = require("informixdb")();
 ``` 
 
 or by creating an instance with the constructor function:
 
 ```javascript
-var Database = require("informixdb").Database
+const Database = require("informixdb").Database
   , informix = new Database();
 ```
 
@@ -170,6 +90,7 @@ If no solution found, you can open a new issue on GitHub.
 
 ## Contributors
 
+* xiaolintangyuan (this fork)
 * Rohit Pandey (rht.uimworld@gmail.com)
 * Anjali Pancholi
 * Sathyanesh Krishnan (msatyan@gmail.com)
@@ -178,30 +99,15 @@ If no solution found, you can open a new issue on GitHub.
 * Lee Smith (notwink@gmail.com)
 * IBM
 
-## Contributing to the informixdb
+## Contributing to the xiaolintangyuan/node-informixdb
 
-[Contribution Guidelines](https://github.com/OpenInformix/node-informixdb/blob/master/Contribution.md)
-
-```
-Contributor should add a reference to the DC sign-off as comment in the pull request(example below):
-DC Signed-off-by: Random J Developer <random@developer.org>
-```
+This fork does not support PR requests. However, you can always fork it if you want and do whatever you want with it.
 
 ## License
+The MIT License (MIT)
 
-  Copyright (c) 2017, 2020 OpenInformix.
-  Copyright (c) 2014, IBM Corporation.
-  Copyright (c) 2013, Dan VerWeire <dverweire@gmail.com>
-  Copyright (c) 2010, Lee Smith <notwink@gmail.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-  Permission to use, copy, modify, and/or distribute this software for any
-  purpose with or without fee is hereby granted, provided that the above
-  copyright notice and this permission notice appear in all copies.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
-  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
-  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
-  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
-  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
-  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
-  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
