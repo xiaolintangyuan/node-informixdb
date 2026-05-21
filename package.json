@@ -36,7 +36,6 @@
     "bindings": "^1.3.0",
     "fstream": "^1.0.12",
     "nan": "^2.27.0",
-    "q": "2.0.3",
     "targz": "^1.0.1",
     "unzipper": "^0.12.3"
   },
@@ -44,14 +43,7 @@
     "node",
     "Informix",
     "odbc",
-    "driver",
-    "IoT",
-    "asynchronous",
-    "synchronous",
-    "scalable",
-    "enterprise",
-    "raspberry",
-    "pi"
+    "driver"
   ],
   "author": "xiaolintangyuan",
   "license": "MIT",
